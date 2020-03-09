@@ -11,14 +11,19 @@ import Instructions from './Instructions';
           refactor to get this Content component to work.
 */
 class Content extends Component {
+
   renderContent = () => {
-    if (false) {
-      return <NoteEditor />;
-    } else if (false) {
-      return <NoteViewer />;
+    if (this.props.clickedStatus) {
+      return <NoteEditor note={this.props.note} onSubmit={this.onSubmit} onCancel={this.props.onCancel}/>;
+    } else if (this.props.note !== null) {
+      return <NoteViewer note={this.props.note} handleEditClick={this.props.handleEditClick}/>;
     } else {
       return <Instructions />;
     }
+  }
+
+  onSubmit = (noteData) => {
+    this.props.saveNote(noteData)
   }
 
   render() {
